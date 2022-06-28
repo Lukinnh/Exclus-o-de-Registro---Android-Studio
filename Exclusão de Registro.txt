@@ -1,0 +1,32 @@
+private long excluirUsuario(long ID) {
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        try {
+
+            db.beginTransaction();
+            String where = "ID=" + ID;
+            ID = db.delete(DB_TABLE, where , null);
+            db.setTransactionSuccessful();
+
+            Log.i("USUARIO_EXCLUIDO","ID: " + ID);
+
+            } 
+
+	  catch (SQLException e) 
+		{
+
+            Log.e("ERROR_USUARIO_EXCLUIDO", "atualizarUsuario: " + e.getMessage(), e);
+
+            } 
+
+	  finally 
+	  	{
+
+            if (db.isOpen()) db.endTransaction();
+
+       	 }
+
+        return ID;
+
+    }
